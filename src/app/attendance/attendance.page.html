@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="attendance-label">{{"Mark Attendance" | translate}}</ion-title>
+
+    <!-- <ion-title class="attendance-class"><span *ngIf="isAClass">{{"Class" | translate}}</span>
+      {{currentClassName}}{{currentStreamName}}
+    </ion-title> -->
+
+    <ion-title class="attendance-class"><span *ngIf="isAClass">{{"Class" | translate}}</span>
+      {{selectedClassName}}
+    </ion-title>
+
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="menu" class="attendance-top-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="attendance-row">
+    <ion-col size="7">
+      <ion-title class="label" color="primary">{{"Showing Class List For" | translate}}</ion-title>
+    </ion-col>
+
+    <ion-col size="5">
+      <div class="calendar-border">
+        <div class="date-text" (click)="pickDate()">
+          <ion-icon class="calendar-icon" src="../assets/icon/general-icons/calendar.svg"></ion-icon>&nbsp;
+          <span></span>{{date | date}}
+          <ion-icon *ngIf="editBtn" name="checkmark-circle" class="calendar-icon" color="success"></ion-icon>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-list>
+    <div class="success-error" *ngIf="emptyClass">
+      <ion-icon class='icon-success' name="close-circle-outline"></ion-icon>
+      <p class='form-success'>{{emptyClass | translate}}!</p>
+    </div>
+    <ion-item *ngFor="let student of stream; let i = index">
+      <ion-label>
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge color="primary">{{1+i}}</ion-badge>
+          </ion-col>
+          <ion-col size="6">
+            <span class="student-name">{{student.first_name |titlecase}} {{student.middle_name |titlecase}}
+              {{student.last_name |titlecase}}</span><br>
+            <div class="student-id">{{student.student_id}}&nbsp;&nbsp;&nbsp;
+              <ion-badge color="success" class="gender-badge">{{student.gender}}</ion-badge>&nbsp;&nbsp;&nbsp;
+              <ion-badge *ngIf="student.special_needs.length>0" class="special-needs-badge">LWD
+              </ion-badge>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-checkbox color="primary" mode="ios" checked='{{student.attendance}}' [(ngModel)]="student.attendance"
+        slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-button *ngIf="!emptyClass" expand="block" (click)="attendance()" class="submit-button">
+    <span *ngIf="!editBtn">{{"Submit" | translate}}</span>
+    <span *ngIf="editBtn">{{"Update Attendance" | translate}}</span>
+  </ion-button>
+</ion-content>

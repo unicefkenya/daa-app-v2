@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/overall-reports"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{'View Absent Learners List' | translate}}</ion-title>
+    <ion-title class="attendance-class">{{'Class' | translate}} {{currentClassName}} {{currentStream}}</ion-title>
+
+    <!-- @Musyoka : Only display the menu for all classes option -->
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="menu" class="attendance-top-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="attendance-row">
+    <ion-col size="8">
+      <ion-title class="label" color="primary">{{"Showing attendance for" | translate}}</ion-title>
+    </ion-col>
+    <ion-col size="4">
+      <div class="calendar-border">
+        <input class="date-text" type="date" [(ngModel)]="date" name="absence-date" [max]="getMaxDate()" [min]="getMinDate()" (ngModelChange)="pickDate($event)">
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      <ion-searchbar class="student-searchbar" [(ngModel)]="search_student"></ion-searchbar>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <div class="success-error">
+      <ion-icon *ngIf="emptyClass" class='icon-success' name="close-circle-outline"></ion-icon>
+      <p *ngIf="emptyClass" class='form-success'>{{emptyClass | translate}}</p>
+    </div>
+
+    <!-- @Musyoka: Kindly set up searching pipe for this page -->
+    <ion-item *ngFor="let student of absentStudents |students:search_student ; let i = index">
+      <ion-label (click)="reasonforAbsence(student)">
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge color="primary">{{1+i}}</ion-badge>
+          </ion-col>
+          <ion-col size="6">
+            <span class="student-name">{{student.first_name
+              |titlecase}}
+              {{student.middle_name | titlecase}} {{student.last_name |titlecase}}</span><br>
+            <span class="student-id">{{student.admission_no}}</span><br>
+            <span class="view-sheet">
+              <span *ngIf="student.reason_absent">{{'Update Reason for Absence' | translate}}</span>
+              <span *ngIf="!student.reason_absent">{{'Provide Reason for Absence' | translate}}</span>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-icon (click)="callNow(student)" class="tab-icon" src="../assets/icon/general-icons/call-phone.svg">
+      </ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

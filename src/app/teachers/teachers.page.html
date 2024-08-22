@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/myschool"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"All Teachers" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      <ion-searchbar class="student-searchbar" placeholder="{{'Search' | translate}}" [(ngModel)]="search_teacher">
+      </ion-searchbar>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- List of Teachers in a school -->
+  <ion-list>
+    <div class="success-error">
+      <ion-icon *ngIf="noTeachers" class='icon-success' name="close-circle-outline"></ion-icon>
+      <p *ngIf="noTeachers" class="form-success">{{noTeachers | translate}}</p>
+    </div>
+    <ion-item *ngFor="let teacher of teachers | teachersPipe:search_teacher; let i = index">
+      <ion-label>
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge color="primary">{{1+i}}</ion-badge>
+          </ion-col>
+          <ion-col size="6">
+            <span class="student-name">
+              {{teacher.first_name | titlecase}} {{teacher.middle_name | titlecase}}
+              {{teacher.last_name | titlecase}}</span><br>
+            <span class="student-id">{{teacher.tsc_no}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-button *ngIf="!teacher.is_non_delete" size="small" color="primary" class="submit-btn edit-button" slot="end"
+        (click)="goEditTeacher(teacher)">{{"Edit"
+        | translate}}</ion-button>
+      <ion-button *ngIf="!teacher.is_non_delete" size="small" color="danger" class="submit-btn" slot="end"
+        (click)="deleteTeacher(teacher)">{{"Deactivate"
+        | translate}}
+      </ion-button>
+      <ion-badge *ngIf="teacher.is_non_delete" size="small" color="tertiary" style="color:grey" disabled="true"
+        class="submit-btn" slot="end">{{"ADMIN"
+        | translate}}
+      </ion-badge>
+
+    </ion-item>
+  </ion-list>
+  <p *ngIf="error" class="form-error">{{error | translate}}</p>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" (click)="gotoaddteachers()">
+    <ion-fab-button color="primary" class="add-fab">
+      <ion-icon class="add-fab-icon" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,85 @@
+.attendance-label {
+  font-family: "Prompt-Medium";
+  color: #fff;
+  font-size: 17px;
+}
+
+.attendance-class {
+  font-family: "Prompt-Light";
+  color: #fff;
+  font-size: 14px;
+  margin-left: 7%;
+  margin-top: 1.5%;
+}
+
+.attendance-top-icon {
+  font-size: 24px !important;
+}
+
+.label {
+  font-family: "Prompt-Semibold";
+  font-size: 13px;
+  color: #3f85d6;
+  margin-top: 9%;
+  margin-left: 7%;
+}
+
+.calendar-border {
+  border: 1px solid #000;
+  height: 23px;
+  margin-top: 15%;
+  margin-left: -32%;
+  margin-right: 28%;
+}
+
+.calendar-icon {
+  margin-left: 5%;
+  color: #000;
+  vertical-align: middle;
+}
+
+.calendar-date {
+  font-family: "Prompt-Regular";
+  color: #404040;
+}
+
+.date-text {
+  font-family: "Prompt-Regular";
+  height: 23px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 12px;
+  margin-left: 3%;
+  width: 100%;
+}
+
+.attendance-row {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.student-name {
+  font-family: "Prompt-Semibold";
+  font-size: 13px;
+  color: #404040;
+}
+
+.student-id {
+  font-family: "Prompt-Light";
+  font-size: 13px;
+  color: #404040;
+}
+
+ion-checkbox {
+  --size: 20px;
+}
+
+ion-badge {
+  font-family: "Prompt-Regular";
+  font-size: 13px;
+}
+
+.submit-button {
+  font-family: "Prompt-Bold";
+  margin-top: 4%;
+}

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">
+      <span *ngIf="!student">{{"Update Attendance" | translate}}</span> <span *ngIf="student">{{"Update Learners" |
+        translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <p class="student-name">
+      <span *ngIf="!student">{{"Attendance Status" | translate}}</span> <span *ngIf="student">{{"Sync Learners Data to
+        Database" | translate}}</span>
+    </p>
+  </ion-item>
+
+  <ion-item>
+    <p class="student-name">{{"Internet Status" | translate}}</p>
+    <ion-badge *ngIf="internet " color="success" mode="ios" slot="end">{{"Connected" | translate}}
+    </ion-badge>
+    <ion-badge *ngIf="!internet && !isTestingOnline" color="danger" mode="ios" slot="end">{{"Disconnected" | translate}}
+    </ion-badge>
+    <ion-badge *ngIf="!internet && isTestingOnline" mode="ios" slot="end" color="secondary">Reconnecting...</ion-badge>
+  </ion-item>
+
+  <ion-item>
+    <div>
+      <p class="student-name">{{"Last Upload Date" | translate}}</p>
+      <span class="sync-name">{{syncDate}}</span><br><br>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <p class="student-name">{{"Records Saved Offline" | translate}}</p>
+    <ion-badge color="primary" mode="ios" slot="end">{{itemNo}}</ion-badge>
+  </ion-item>
+
+  <ion-item>
+    <p class="student-name">{{"Items Failed to Upload" | translate}}</p>
+    <ion-badge color="danger" mode="ios" slot="end">{{failed}}</ion-badge>
+  </ion-item>
+
+  <ion-button *ngIf="student" expand="block" (click)="attendance()" class="submit-button">
+    <span>{{"Download Latest Class List" | translate}}</span>
+  </ion-button>
+  <!-- 
+  <ion-button *ngIf="this.itemNo > 0 || this.failed > 0" expand="block" class="submit-button"
+    (click)="syncdata()">
+    <span *ngIf="!student">Update Attendance</span> <span *ngIf="student">Update Learners</span>
+  </ion-button>
+  <ion-button *ngIf="this.itemNo < 1 && this.failed < 1" color="success" expand="block" class="submit-button"
+    (click)="syncdata()">
+    UP TO DATE
+  </ion-button> -->
+
+</ion-content>

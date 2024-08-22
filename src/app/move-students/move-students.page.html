@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/myschool"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Move Learners" | translate}}</ion-title>
+    <ion-title class="attendance-class">{{"Class" | translate}} {{currentClassName}} {{currentStreamName}}</ion-title>
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="menu" class="attendance-top-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- List of Learners in a class -->
+  <ion-list>
+    <ion-item *ngIf="!emptyClass">
+      <ion-label class="student-name-mark"><b>{{"Mark All Learners" | translate}}</b></ion-label>
+      <ion-checkbox mode="ios" color="primary" slot="start" checked='markAll' [(ngModel)]="markAll" (click)="markAllCheck()"></ion-checkbox>
+    </ion-item>
+    <div class="success-error">
+      <ion-icon *ngIf="emptyClass" class='icon-success' name="close-circle-outline"></ion-icon>
+      <p *ngIf="emptyClass" class='form-success'>{{"This class has no learners" | translate}}!</p>
+    </div>
+    <ion-item *ngFor="let student of stream">
+      <ion-label class="student-name">
+        {{student.first_name |titlecase}} {{student.middle_name |titlecase}} {{student.last_name |titlecase}}<br>
+        <span class="student-id">{{student.admission_no}}</span>
+      </ion-label>
+
+      <ion-checkbox mode="ios" color="primary" checked='{{student.attendance}}' [(ngModel)]="student.attendance" slot="start"
+        (click)="singleCheck(student.id)"></ion-checkbox>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label class="
+        student-name">Jon Snow</ion-label>
+        <ion-checkbox mode="ios" color="primary" checked slot="start"></ion-checkbox>
+    </ion-item> -->
+    <p *ngIf="error" class="form-error">{{error | translate}}</p>
+  </ion-list>
+
+  <ion-button *ngIf="!emptyClass" expand="block" class="submit-button" (click)="movestudentAlert()">
+    {{"Move Learners" | translate}}
+  </ion-button>
+
+</ion-content>

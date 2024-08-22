@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button class="black-back" defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">
+      <span>Contact Support</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="forgot-password-body">
+    <img class="wv-logo" src="../assets/icon/branding/coat-of-arms.png" alt="">
+
+    <ion-title class="forgot-password-title">Looking for support? Fill in the details below <br>with the issue you are facing and we will <br>resolve it as soon as possible.</ion-title>
+
+    <app-myform [extraFields]="extra_fields" [formItems]="formItems" [url]="url" [submitButtonText]="'Submit'" submitButtonPreText=""
+    [formGroupOrder]="formGroupOrder" [hideButtons]=false (onPostedData)="onPostedData($event)">
+  </app-myform> 
+
+  </div>
+
+</ion-content>
+
+

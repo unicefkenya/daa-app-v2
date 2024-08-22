@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/students/add-student;data=add_1"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Guardian Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-myform [extraFields]="extra_fields" [formItems]="formItems" [url]="url"
+    (onValidatedData)="onValidatedData($event)" [submitButtonText]="'Student'" [formGroupOrder]="formGroupOrder"
+    [hideButtons]=false (onPostedData)="onPostedData($event)" (onValidatedData)="onValidatedData($event)"
+    [isValidationOnly]="isValidationOnly" [instance]="instance">
+  </app-myform>
+
+</ion-content>

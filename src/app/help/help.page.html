@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button class="black-back" defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">
+      <span>{{"Help & Support" | translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="response">
+  <ion-card class="accordion-card" (click)="expandItem(item)" *ngFor="let item of help">
+    <ion-card-header>
+      <ion-card-title class="accordion-title">{{item.title | translate}}</ion-card-title>
+      <ion-icon class="accordion-icon" name="add-circle-outline">
+      </ion-icon>
+    </ion-card-header>
+
+    <ion-card-content>
+      <app-accordion expandHeight="100px" [expanded]="item.expanded">
+        <p class="accordion-content">
+          {{item.description | translate}}
+        </p>
+      </app-accordion>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="accordion-card">
+    <ion-card-header>
+      <ion-card-title class="manual-title">{{"Incase you need further assistance, kindly refer to our user manual or
+        contact us
+        below" | translate}}
+      </ion-card-title>
+      <ion-icon class="manual-icon" name="arrow-round-down">
+      </ion-icon>
+    </ion-card-header>
+  </ion-card>
+  <br>
+  <ion-button expand="block" (click)="contactUs()" class="submit-button contact-us-button">
+    <ion-icon slot="start" name="mail"></ion-icon>
+    {{"Contact Us" | translate}}
+  </ion-button>
+  <ion-button expand="block" (click)="manualBrowser()" class="submit-button user-manual-button">
+    <ion-icon slot="start" name="cloud-download"></ion-icon>
+    {{"View User Manual" | translate}}
+  </ion-button>
+  <br> <br>
+</ion-content>

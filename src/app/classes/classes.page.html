@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/myschool"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"All Classes" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- List of Classes in a school -->
+  <ion-list>
+    <div class="success-error">
+      <ion-icon *ngIf="noClass" class='icon-success' name="close-circle-outline"></ion-icon>
+      <p *ngIf="noClass" class="form-success">{{noClass}}</p>
+    </div>
+    <ion-item *ngFor="let class of classes; let i = index">
+      <ion-label>
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge color="primary">{{1+i}}</ion-badge>
+          </ion-col>
+          <ion-col size="6">
+            <span class="student-name">{{class.base_class}}&nbsp;{{class.name}}</span><br>
+            <span class="student-id"> {{class.male_students}} Boys</span><br>
+            <span class="student-id">{{class.female_students}} Girls</span>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+      <p *ngIf="error" class="form-success">{{error | translate}}</p>
+      <ion-button size="small" class="submit-btn" slot="end" (click)="goEditClass(class)">{{"Edit"
+        | translate}}</ion-button>
+      <ion-button size="small" color="danger" class="submit-btn" slot="end" (click)="deleteclass(class)">{{"Delete"
+        | translate}}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" (click)="gotoaddclasses()">
+    <ion-fab-button color="primary">
+      <ion-icon class="add-fab-icon" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

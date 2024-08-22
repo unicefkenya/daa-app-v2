@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/myschool"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Learners" | translate}}</ion-title>
+    <ion-title class="attendance-class">{{"Class"| translate}} {{selectedClassName}}</ion-title>
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="menu" class="attendance-top-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      <ion-searchbar class="student-searchbar" placeholder="{{'Search' | translate}}" [(ngModel)]="search_student">
+      </ion-searchbar>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <div class="success-error">
+      <ion-icon *ngIf="emptyClass" class='icon-success' name="close-circle-outline"></ion-icon>
+      <p *ngIf="emptyClass" class='form-success'>{{emptyClass | translate}}!</p>
+    </div>
+    <div>
+      <ion-item *ngFor="let student of stream |students:search_student ; let i = index">
+        <ion-label>
+          <ion-row>
+            <ion-col size="2">
+              <ion-badge color="primary">{{1+i}}</ion-badge>
+            </ion-col>
+            <ion-col size="6">
+              <span class="student-name"> {{student.first_name
+                |titlecase}}
+                {{student.middle_name | titlecase}} {{student.last_name |titlecase}}</span><br>
+              <span class="student-id">{{student.student_id}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-label>
+        <ion-button size="small" class="submit-btn edit-button" slot="end" (click)="gotoeditstudent(student)">
+          {{"Edit" | translate}}
+        </ion-button>
+        <ion-button size="small" color="danger" class="submit-btn" slot="end" (click)="gotoreason(student)">
+          {{"Deactivate"
+          | translate}}
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" (click)="gotoaddstudents()">
+    <ion-fab-button color="primary" class="add-fab">
+      <ion-icon class="add-fab-icon" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

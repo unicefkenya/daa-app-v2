@@ -1,0 +1,82 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Moe Kenya App Build
+
+# on:
+#   push:
+#     branches: [main]
+on: [workflow_dispatch]
+env:
+  bundleType: bundle
+  JAVA_HOME: /opt/homebrew/opt/openjdk@11
+jobs:
+  build:
+    name: Ionic Build
+    runs-on: android
+    steps:
+      - name: Build Started
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://hooks.slack.com/services/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"
+          method: "POST"
+          data: ' {"text":"Build #${{github.run_number}} Started."}'
+
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js v18.18.2
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
+          
+
+      - name: Install Packages
+        run: npm ci --force
+
+      - name: Install Ionic & Cordova
+        run: npm i -g @ionic/cli cordova
+
+      - name: Build Bundle
+        run: npm run build:$bundleType
+
+  sign:
+    name: Application Signing and Uploading
+    runs-on: android
+    needs: [build]
+    # if: $bundleType == 'bundle'
+
+    steps:
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app ${{env.bundleType}}
+        # ID used to access action output
+        id: sign_app
+        with:
+          releaseDirectory: platforms/android/app/build/outputs/${{env.bundleType}}/release
+          signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
+          keyPassword: ${{ secrets.KEYPASSWORD }}
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "30.0.3"
+
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://hooks.slack.com/services/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"
+          method: "POST"
+          data: ' {"text":"${{github.run_number}} Passed."}'
+
+      - name: Extract APK
+        run: |
+          java -jar $HOME/bundletool-all-1.8.2.jar build-apks --bundle=${{steps.sign_app.outputs.signedReleaseFile}} --output=my_app.apks --mode=universal
+          unzip -p my_app.apks universal.apk > moeApp.apk
+          ls
+
+      - uses: actions/upload-artifact@v2
+        name: Uploading ${{env.bundleType}}
+        with:
+          name: MOE app ${{github.run_number}}
+          path: |
+            ${{steps.sign_app.outputs.signedReleaseFile}}
+            moeApp.apk

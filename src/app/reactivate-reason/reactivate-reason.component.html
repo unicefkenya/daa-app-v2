@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/deactivated-students"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Reactivate" | translate}} Ali Dennis</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="!offline" color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"Select a reason to reactivate the learner"| translate}}&nbsp;
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <p *ngIf="error" class='form-error'>{{error | translate}}</p>
+    <ion-radio-group [(ngModel)]="reasonValue">
+      <ion-item *ngFor="let res of deleteReasons">
+        <ion-label class="student-name">{{res.description | translate}}</ion-label>
+        <ion-radio name="deceased" class="delete-radio" value="{{res.id}}" (click)="clear"></ion-radio>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label class="student-name">Other reason</ion-label>
+        <ion-radio name="other" class="delete-radio" value="other"></ion-radio>
+      </ion-item> -->
+
+    </ion-radio-group>
+
+    <ion-item *ngIf="reasonValue == otherId">
+      <ion-textarea [(ngModel)]="otherReason" class="other-textarea" placeholder="Provide additional information for deleting the learner.">
+      </ion-textarea>
+    </ion-item>
+
+  </ion-list>
+  <ion-button *ngIf="!offline" expand="block" (click)="presentAlertConfirm()" class="submit-button">
+    {{"Reactivate"| translate}}</ion-button>
+
+</ion-content>

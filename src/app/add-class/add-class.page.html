@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/classes"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label">
+      <span *ngIf="!edit">{{"Add Class" | translate}}</span><span *ngIf="edit">{{"Edit Class" | translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="classForm" (ngSubmit)="submitClassForm()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding list-margin">
+      <ion-item>
+        <ion-label position="stacked" class="input-label">Class / Grade&nbsp;<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Class' | translate}} e.g 1,2,3"
+          formControlName="base_class">
+          <ion-select-option *ngFor="let classname of classes; let i = index" value="{{classname.id}}">
+            {{classname.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Stream Name" | translate}} &nbsp;<ion-text color="danger">
+          </ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" placeholder="{{'Enter Stream Name' | translate}} e.g East"
+          formControlName="name">
+        </ion-input>
+      </ion-item>
+      <p *ngIf="error" class="form-error">{{error | translate}}</p>
+    </ion-list>
+    <ion-button expand="block" type="submit" class="submit-button">
+      <span *ngIf="!edit">{{"Add Class" | translate}}</span><span *ngIf="edit">{{"Edit Class" | translate}}</span>
+    </ion-button>
+  </form>
+
+</ion-content>

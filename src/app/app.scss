@@ -1,0 +1,122 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These
+// styles are for the entire app and not just one component. Additionally, this
+// file can hold Sass mixins, functions, and placeholder classes to be imported
+// and used throughout the application.
+
+@import "../theme/fonts";
+
+.form-error {
+  color: rgb(255, 0, 0);
+  text-align: center;
+  font-size: 13px;
+  font-family: "Prompt-Regular";
+}
+
+.form-success {
+  color: #727272;
+  text-align: center;
+  font-family: "Prompt-Regular";
+  font-size: 13px;
+}
+
+.icon-success {
+  color: gainsboro;
+  font-size: 36px;
+  margin-left: 45%;
+  margin-top: 50%;
+}
+
+ion-alert {
+  font-family: "Prompt-Regular";
+  font-size: 10px !important;
+}
+
+.alert-title.sc-ion-alert-md {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.alert-message.sc-ion-alert-md {
+  max-height: 240px;
+  font-size: 15px;
+}
+
+.alert-button.sc-ion-alert-md {
+  font-size: 13px;
+}
+
+.alert-wrapper.sc-ion-alert-md {
+  min-width: 380px;
+}
+
+@media screen and (max-width: 400px) {
+  .alert-wrapper.sc-ion-alert-md {
+    min-width: 300px;
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .alert-wrapper.sc-ion-alert-md {
+    min-width: 600px;
+  }
+}
+
+ion-checkbox {
+  --size: 20px;
+  --border-color: #e91d64;
+}
+
+ion-radio {
+  --color: #e91d64;
+}
+
+ion-badge {
+  font-family: "Prompt-Regular";
+  font-size: 13px;
+}
+
+.attendance-chart {
+  display: block;
+  width: 360px;
+  height: 393px;
+}
+
+.splash {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.wv-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.spinner {
+  animation: fadeOutUp;
+  animation-duration: 6.5s;
+  animation-iteration-count: 1;
+  transform-origin: center;
+}
+
+/* Fadeout animation */
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -200%, 0);
+    transform: translate3d(0, -200%, 0);
+  }
+}

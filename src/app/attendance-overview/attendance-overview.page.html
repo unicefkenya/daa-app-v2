@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/attendance"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Daily Attendance Report" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="chart-card">
+    <ion-card-header>
+      <ion-card-title class="student-name" *ngIf="user">{{"Thank you" | translate}}, {{user.first_name | titlecase}}
+        {{user.last_name |titlecase}}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="attendance-chart">
+        <canvas id="attendance-chart"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-card>
+      <ion-card-content class="present-bg">
+        <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="checkmark-circle"></ion-icon>
+            </ion-col>
+            <ion-col size=7>
+              <span class="retention-rate"> {{"Learners Present" | translate}}</span><br>
+              <span
+                class="retention-rate-text">{{"Total number of present learners in the class today" | translate}}</span><br>
+              <span class="retention-rate-text">{{"Boys Present" | translate}} &nbsp;({{boysPresent}})</span><br>
+              <span
+                class="retention-rate-text">{{"Girls Present" | translate}}&nbsp;({{present - boysPresent}})</span><br>
+            </ion-col>
+            <ion-col size=3>
+              <span class="retention-number"> {{present}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content class="absent-bg">
+        <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="close-circle"></ion-icon>
+            </ion-col>
+            <ion-col size=7>
+              <span class="retention-rate">{{"Learners Absent" | translate}}</span><br>
+              <span
+                class="retention-rate-text">{{"Total number of absent learners in the class today" | translate}}</span><br>
+              <span class="retention-rate-text">{{"Boys Absent" | translate}} &nbsp;({{boysAbsent}})</span><br>
+              <span class="retention-rate-text">{{"Girls Absent" | translate}}&nbsp;({{absent - boysAbsent}})</span><br>
+            </ion-col>
+            <ion-col size=3>
+              <span class="retention-number"> {{absent }}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content class="absent-bg">
+      <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="alert-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col size=10>
+              <p (click)="gotoreasonforabsence()"> Update Reasons for Absence</p>
+            </ion-col>
+         </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+
+</ion-content>

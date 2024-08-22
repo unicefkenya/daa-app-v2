@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button class="black-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label">{{schoolName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"Learners" | translate}} &nbsp;
+      <ion-badge color="white" class="school-badge"> {{boys}} {{"Male" | translate}} | {{girls}} {{"Female" |
+        translate}} | {{boys + girls}} {{"Total Learners" | translate}}
+      </ion-badge>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item class="card-item" (click)="gotostudents()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/add-school.svg"></ion-icon>&nbsp; {{"Add / Edit
+        Learners" | translate}} &nbsp;
+      </ion-item>
+
+      <ion-item class="card-item" (click)="viewstudents()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/view-school.svg"></ion-icon>&nbsp; {{"View Learner
+        Details" | translate}} &nbsp;
+      </ion-item>
+
+      <ion-item *ngIf="isAdmin" class="card-item" (click)="gotomovestudents()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/move-student.svg"></ion-icon>&nbsp; {{"Move
+        Learners" | translate}}
+      </ion-item>
+
+      <ion-item *ngIf="isAdmin" class="card-item" (click)="gotoreasonforabsence()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/reason-for-absence.svg"></ion-icon>&nbsp; {{"Update Reasons For Absence" | translate}}
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="isAdmin" color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"Teachers" | translate}} &nbsp;
+      <ion-badge color="white" class="school-badge"> {{teachersCount}}
+        <span *ngIf="teachersCount > 1">{{"Teachers" | translate}}</span> <span *ngIf="teachersCount < 2">{{"Teacher" |
+          translate}}</span>
+      </ion-badge>
+    </ion-card-header>
+    <ion-list>
+      <ion-item class="card-item" (click)="gototeachers()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/add-school.svg"></ion-icon>&nbsp; {{"Add / Edit
+        Teachers" | translate}}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="isAdmin" color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"Classes" | translate}} &nbsp;
+      <ion-badge color="white" class="school-badge"> {{classesCount}}
+        <span *ngIf="classesCount > 1">{{"Classes"| translate}}</span> <span *ngIf="classesCount < 2">{{"Class"|
+          translate}}</span>
+      </ion-badge>
+    </ion-card-header>
+    <ion-list>
+      <ion-item class="card-item" (click)="gotoclasses()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/add-school.svg"></ion-icon>&nbsp; {{"Add / Edit
+        Classes"| translate}}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

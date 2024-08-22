@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Attendance Report" | translate}}</ion-title>
+    <ion-title class="attendance-class">
+      <span *ngIf="!allClassesReport">{{"Class" | translate}} {{selectedClassName}}</span>
+      <span *ngIf="allClassesReport">{{"All Classes" | translate}}</span>
+    </ion-title>
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="menu" class="attendance-top-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="attendance-row">
+    <ion-col size="8">
+      <ion-title class="label" color="primary">{{"Showing attendance for" | translate}}</ion-title>
+    </ion-col>
+    <ion-col size="4">
+      <div class="calendar-border">
+        <div class="date-text" (click)="pickDate()">
+          <ion-icon class="calendar-icon" src="../assets/icon/general-icons/calendar.svg"></ion-icon>&nbsp;
+          <span></span>{{date | date}}
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="emptyClass" class="success-error">
+    <ion-icon class='icon-success' name="close-circle-outline"></ion-icon>
+    <p class='form-success'>{{emptyClass | translate}}!</p>
+  </div>
+
+  <ion-card *ngIf="pieDataReady">
+    <ion-card-content>
+      <app-piechart [pData]='pieData'></app-piechart>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="pieDataReady">
+    <ion-card>
+      <ion-card-content class="present-bg">
+        <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="checkmark-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col size=7>
+              <span class="retention-rate">{{"Learners Present" | translate}}</span><br>
+              <span class="retention-rate-text">{{"Boys Present" | translate}}
+                &nbsp;({{results.present_males}})</span><br>
+              <span class="retention-rate-text">{{"Girls Present" | translate}}
+                &nbsp;({{results.present_females}})</span>
+            </ion-col>
+            <ion-col size=3>
+              <span class="retention-number"> {{results.total_persent}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="absent-bg">
+        <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="close-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col size=7>
+              <span class="retention-rate">{{"Learners Absent" | translate}}</span><br>
+              <span class="retention-rate-text">{{"Boys Absent" | translate}}
+                &nbsp;({{results.absent_males}})</span><br>
+              <span class="retention-rate-text">{{"Girls Absent" |
+                translate}}&nbsp;({{results.absent_females}})</span><br>
+            </ion-col>
+            <ion-col size=3>
+              <span class="retention-number"> {{results.total_absent}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="results.total_absent > 0" (click)="gotoabsence()">
+      <ion-card-content class="absent-reason-bg">
+        <ion-grid>
+          <ion-row>
+            <ion-col size=2>
+              <ion-icon class="probability-check" name="alert-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col size=10>
+              <span class="absent-label-text">
+                {{"View Absent Learners List" | translate}}
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- <ion-card>
+    <ion-row class="attendance-row-colored">
+      <ion-col>
+        <span class="label">Learners Absent<ion-badge class="school-badge" mode="ios" slot="end">
+            8
+          </ion-badge>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-card> -->
+
+  <!-- <ion-list *ngIf="pieDataReady">
+    <p *ngIf="emptyClass" class='form-success'>{{emptyClass}}</p>
+    <ion-item *ngFor="let student of stream; let i = index">
+      <ion-label (click)="individualattendance()">
+        <div>
+          <ion-badge color="primary" mode="ios">{{1+i}}</ion-badge>&nbsp; &nbsp;<span class="student-name">{{student.first_name
+            |titlecase}}
+            {{student.middle_name | titlecase}} {{student.last_name |titlecase}}</span>
+          <p class="student-id">{{student.admission_no}}</p>
+        </div>
+      </ion-label>
+      <ion-icon (click)="callNow(student.guardian_phone)" class="tab-icon"
+        src="../assets/icon/general-icons/call-phone.svg">
+      </ion-icon>
+    </ion-item>
+  </ion-list> -->
+
+</ion-content>

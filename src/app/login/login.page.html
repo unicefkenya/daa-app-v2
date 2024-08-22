@@ -1,0 +1,63 @@
+<ion-content padding>
+
+  <a href="https://www.education.go.ke/" target="_blank"><img class="wv-logo"
+      src="../assets/icon/branding/coat-of-arms.png" alt=""></a>
+  <ion-text>
+    <ion-title class="logo-txt">REPUBLIC OF KENYA</ion-title>
+    <p class="logo-txt ministry-text">Ministry of Education</p>
+    <p class="logo-txt state-text">State Department for Early Learning and <br>Basic Education </p>
+  </ion-text>
+
+  <div class="login-frame">
+    <ion-text color="light-contrast">
+      <ion-title class="login-text">{{"Proceed with your" | translate }}</ion-title>
+      <ion-title class="login-text-bold">{{"Login" | translate}}</ion-title>
+    </ion-text>
+
+    <form [formGroup]="LoginForm" (ngSubmit)="login()">
+      <ion-item class="input-position">
+        <ion-label position="stacked" class="login-label">{{"School NEMIS Code / Phone Number" | translate}}</ion-label>
+        <ion-icon class="login-icon" src="../assets/icon/login-icons/username.svg"></ion-icon>
+        <ion-input type="text" class="input-form" formControlName='username'></ion-input>
+      </ion-item>
+
+      <ion-item class="input-position-password">
+        <ion-label position="stacked" class="login-label">{{"Password" | translate}}</ion-label>
+        <ion-icon class="login-icon" src="../assets/icon/login-icons/password.svg"></ion-icon>
+        <ion-input type="password" class="input-form" formControlName='password'></ion-input>
+      </ion-item>
+      <p *ngIf="formError" class="form-error">{{formError | translate}}!</p>
+      <ion-button type='submit' class="login-button" expand="block">{{"Login" | translate}}</ion-button>
+
+      <!-- <ion-text color="dark">
+        <p class="forgot-password">{{"Forgot Password" | translate}}?</p>
+      </ion-text> -->
+    </form>
+  </div>
+
+  <div>
+    <ion-text color="dark">
+      <p class="forgot-password" (click)='gotoForgotPassword()'>Forgot Password?</p>
+    </ion-text>
+  </div>
+
+  <ion-grid>
+    <ion-row class="partner-logo">
+      <ion-col><a href="https://nemis.education.go.ke/" target="_blank"><img
+        src="../../assets/icon/branding/nemis-logo.jpg" alt="NEMIS-Logo" class="nemis-logo"></a>
+      </ion-col>
+      <ion-col><a href="https://www.naconek.go.ke/" target="_blank"><img src="../../assets/icon/branding/naconek.png"
+        alt="Naconek-Logo" class="naconek-logo"></a></ion-col>
+      <ion-col><a href="https://www.unicef.org/kenya/" target="_blank"><img
+            src="../../assets/icon/branding/unicef-logo.png" alt="Unicef-Logo" class="unicef-logo"></a></ion-col>
+      <ion-col><a href="https://educateachild.org/" target="_blank"><img
+            src="../../assets/icon/branding/educate-a-child.png" alt="Educate-Logo" class="educate-a-child-logo"></a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <span class=" card-item forgot-password" (click)="changeLag()">
+    <ion-icon class="tab-icon" src="../assets/icon/general-icons/google-translate.svg"></ion-icon>&nbsp;
+    {{"Change Language / Badel Luuqada"}}
+  </span> -->
+
+</ion-content>

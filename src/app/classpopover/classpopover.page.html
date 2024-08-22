@@ -1,0 +1,17 @@
+<!-- <ion-item *ngIf="!classes">You are not assigned any classes</ion-item> -->
+<ion-list>
+  <ion-list-header class="class-list-header">{{"Your Classes" | translate}}</ion-list-header>
+  <ion-item *ngFor="let class of classes" (click)="closePopOver(class)">
+    <ion-label class="class-list">
+      <!-- <span *ngIf="class.id != 'all'">{{class.base_class}}{{class.name}}</span> -->
+      <span *ngIf="class.id != 'all'">{{class.class_name}}</span>
+      <span *ngIf="class.id == 'all'">{{"All Classes" | translate}}</span>
+    </ion-label>
+  </ion-item>
+  <!-- <ion-list-header *ngIf="isAdmin" class="class-list-header">{{"Your Teachers" | translate}}</ion-list-header>
+  <ion-item *ngIf="isAdmin">
+    <ion-label class="teachers-list" (click)="closePopOver(teacherObj)">
+      <span>{{"Teachers" | translate}}</span>
+    </ion-label>
+  </ion-item> -->
+</ion-list>

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label" *ngIf="user"><span class="inner-label">Logged in as
+      </span>{{user.first_name | titlecase}} {{user.last_name |titlecase}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"User Profile" | translate}}
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item class="card-item" (click)="gotoeditpassword()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/password.svg"></ion-icon>&nbsp; {{"Edit Password"
+        | translate}}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card color="primary" class="card-class">
+    <ion-card-header class="card-header">
+      {{"Application Settings" | translate}}
+    </ion-card-header>
+    <ion-list>
+      <ion-item class="card-item" (click)="gotoupdateattendance()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/update-attendance.svg"></ion-icon>&nbsp;
+        Offline Attendance Status
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item class="card-item" (click)="gotoupdatestudent()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/update-students.svg"></ion-icon>&nbsp;Offline
+        Enrolment Status
+      </ion-item>
+    </ion-list>
+    <!-- <ion-list>
+      <ion-item class="card-item" (click)="changeLag()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/google-translate.svg"></ion-icon>&nbsp; {{"Change
+        Language / Badel Luuqada"}}
+      </ion-item>
+    </ion-list> -->
+    <ion-list>
+      <ion-item class="card-item" (click)="gotohelp()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/user-manual.svg"></ion-icon>&nbsp; {{"Help & User
+        Manual" | translate}}
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item class="card-item" (click)="logout()">
+        <ion-icon class="tab-icon" src="../assets/icon/general-icons/logout.svg"></ion-icon>&nbsp; {{"Logout" |
+        translate}}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

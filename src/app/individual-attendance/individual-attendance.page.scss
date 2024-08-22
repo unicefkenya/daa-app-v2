@@ -1,0 +1,112 @@
+.attendance-label {
+  font-family: "Prompt-Medium";
+  color: #fff;
+  font-size: 17px;
+}
+
+.student-name {
+  font-family: "Prompt-Semibold";
+  font-size: 15px;
+  color: #404040;
+}
+
+.student-name-label {
+  font-family: "Prompt-Semibold";
+  font-size: 15px;
+}
+
+.school-badge {
+  font-family: "Prompt-Regular";
+  background-color: white;
+  color: #404040;
+  font-size: 11px;
+  padding: 4px;
+  float: right;
+}
+
+.absent-card {
+  margin-top: 2%;
+}
+
+.checkmark {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.retention-number {
+  font-family: "Prompt-Bold";
+  font-size: 20px;
+  font-weight: 800;
+  float: right;
+}
+
+.retention-rate {
+  font-family: "Prompt-Bold";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.retention-rate-text {
+  font-family: "Prompt-Regular";
+  font-size: 11px;
+}
+
+.probability-check {
+  font-size: 26px;
+}
+
+ion-accordion-group {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.chart-card {
+  margin-top: 5%;
+  @extend ion-accordion-group;
+}
+
+.present-bg {
+  background-color: #2096f3;
+  color: white;
+  @extend ion-accordion-group;
+}
+
+.absent-bg {
+  background-color: #e91d64;
+  color: #fff;
+  @extend ion-accordion-group;
+}
+
+ion-label {
+  font-family: "Prompt-Regular" !important;
+  font-size: 15px !important;
+  font-weight: 600;
+}
+
+.learner-label {
+  font-family: "Prompt-Bold" !important;
+  font-size: 15px;
+}
+
+.spacing {
+  margin-bottom: 10px;
+}
+
+ion-accordion.accordion-expanding ion-item[slot="header"],
+ion-accordion.accordion-expanded ion-item[slot="header"] {
+  --color: rgb(128, 0, 128, 0.7);
+}
+
+ion-accordion.accordion-collapsing ion-item[slot="header"],
+ion-accordion.accordion-collapsed ion-item[slot="header"] {
+  --color: rgb(49, 113, 224, 0.7);
+}
+
+.reason-absence.accordion-expanding ion-item[slot="header"],
+.reason-absence.accordion-expanded ion-item[slot="header"] {
+  --color: rgb(128, 0, 128, 0.7);
+}
+
+.reason-absence.accordion-collapsing ion-item[slot="header"],
+.reason-absence.accordion-collapsed ion-item[slot="header"] {
+  --color: rgb(233, 29, 100, 0.6);
+}

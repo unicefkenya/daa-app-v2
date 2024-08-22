@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup" (ngSubmit)="dataReceived()">
+    <div *ngFor="let item of formGroupOrder;let i=index;">
+        <div>
+            <ion-list lines="full" class="ion-no-margin ion-no-padding list-margin">
+            </ion-list>
+            <app-myinput *ngFor="let field of item;let j=index;" [formErrors]="formErrors"
+                [data]="getDescriptionObject(field)" [form]="formGroup" formControName="{{field}}">
+            </app-myinput>
+        </div>
+    </div>
+
+    <span *ngFor="let error of detailErrors" class="text-danger">
+        {{error}} <br>
+    </span>
+
+    <br>
+    <div *ngIf="!hideButtons">
+        <!-- <button [disabled]="!formGroup.valid" type="submit" class="submit-button">
+            {{isLoading?'Loading...':formAction+' '+submitButtonText}} </button> -->
+
+        <ion-button expand="block" type="submit" [disabled]="!formGroup.valid || isLoading" class="submit-button">
+            {{isLoading?'Loading...':formAction+' '+submitButtonText}}
+        </ion-button>
+    </div>
+
+</form>

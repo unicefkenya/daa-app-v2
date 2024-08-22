@@ -1,0 +1,25 @@
+.tab-label {
+  font-family: "Prompt-Medium";
+  color: #f0eeec;
+  font-size: 14px;
+}
+
+.tab-icon {
+  font-size: 20px;
+  color: #f0eeec;
+}
+
+ion-tab-button {
+  --background: #3f85d6;
+}
+
+.tab-selected {
+  ion-icon {
+    color: #fff;
+  }
+  ion-label {
+    color: #fff;
+  }
+  border-bottom: 1px solid white;
+  border-width: thick;
+}

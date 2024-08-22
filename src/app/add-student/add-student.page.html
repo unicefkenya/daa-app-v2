@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/students"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label">
+      <span *ngIf="!edit">{{"Add Learner" | translate}}</span>
+      <span *ngIf="edit">{{"Edit Learner"| translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="processForm" (ngSubmit)="submitProcessForm()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding list-margin">
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"First Name" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="first_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Middle Name" | translate}}
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="middle_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Last Name" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="last_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Admission Number" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="admission_no"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Guardian Phone Number" | translate}}
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="guardian_phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Gender" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Gender'  | translate}}" formControlName="gender">
+          <ion-select-option value="F">{{"Female" | translate}}</ion-select-option>
+          <ion-select-option value="M">{{"Male" | translate}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Date Of Birth" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" placeholder="{{'Select Date'  | translate}}"
+          formControlName="date_of_birth" (click)="pickDate()" readonly>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Class" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Class'  | translate}}" formControlName="stream">
+          <ion-select-option *ngFor="let stream of streams" value="{{stream.id}}">{{stream.class_name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Special Needs" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Learner Special Needs' | translate}}"
+          formControlName="special_needs" multiple>
+          <ion-select-option *ngIf="edit" value="NS">{{"Not Set" | translate}}</ion-select-option>
+          <ion-select-option value="N">{{"None" | translate}}</ion-select-option>
+          <ion-select-option value="V">{{"Visual Impairements" | translate}}</ion-select-option>
+          <ion-select-option value="H">{{"Hearing Impairements" | translate}}</ion-select-option>
+          <ion-select-option value="P">{{"Physical Disabilities" | translate}}</ion-select-option>
+          <ion-select-option value="L">{{"Learning Difficulties" | translate}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Guardian Status" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Guardian Status'  | translate}}"
+          formControlName="guardian_status">
+          <ion-select-option *ngIf="edit" value="NS">Not Set</ion-select-option>
+          <ion-select-option value="N">{{"None" | translate}}</ion-select-option>
+          <ion-select-option value="S">{{"Single Parent" | translate}}</ion-select-option>
+          <ion-select-option value="B">Both Parents</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Guardian Name" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" placeholder="{{'Guardian Name'  | translate}}"
+          formControlName="guardian_name">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Distance from Home to School" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input type="number" class="input-placeholder" placeholder="{{'Distance in kms'  | translate}}"
+          formControlName="distance_from_school">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+
+        <ion-label position="stacked" class="input-label">{{"County" | translate}}&nbsp;<ion-text color="danger">
+          </ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select County'| translate}}" formControlName="state_id">
+          <ion-select-option *ngIf="edit" value="NS">Not Set</ion-select-option>
+          <ion-select-option *ngFor="let state of states" value="{{state.entityId}}">{{state.entityName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Sub County" | translate}}&nbsp;<ion-text color="danger">
+          </ion-text>
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Sub County'| translate}}" formControlName="region_id"
+          (ionChange)="selectedRegion($event)">
+          <ion-select-option *ngIf="edit" value="NS">Not Set</ion-select-option>
+          <ion-select-option *ngFor="let region of regions" value="{{region.entityId}}">{{region.entityName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <p *ngIf="success" class="form-success">{{success | translate}}</p>
+      <p *ngIf="error" class="form-error">{{error | translate}}</p>
+    </ion-list>
+    <p></p>
+    <ion-button expand="block" type="submit" class="submit-button">
+      <span *ngIf="!edit">{{"Add Learner" | translate}}</span>
+      <span *ngIf="edit">{{"Update Learner" | translate}}</span>
+    </ion-button>
+  </form>
+
+</ion-content>

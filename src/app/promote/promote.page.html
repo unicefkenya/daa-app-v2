@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/myschool"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="attendance-label">{{"Promote Students" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="success-error">
+    <ion-icon *ngIf="emptyClass" class='icon-success' name="close-circle-outline"></ion-icon>
+    <p *ngIf="emptyClass" class='form-success'>{{"No classes available" | translate}}</p>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let stream of allStreams; let i = index">
+      <ion-label>
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge color="primary">{{1+i}}</ion-badge>
+          </ion-col>
+          <ion-col size=6>
+            <span class="student-name">
+              {{"Class" | translate}} {{stream.base_class}}{{stream.name}}
+            </span><br>
+            <span class="student-id"> {{stream.population}}
+              <span *ngIf="stream.population < 2"> {{ "Learner" | translate}} </span>
+              <span *ngIf="stream.population > 1"> {{"Learners" | translate}}</span></span> </ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-button *ngIf="!unDoPromotion && !completePromotion" fill="outline" size="small" slot="end"
+        (click)="promoteStudentsAlert(stream, i)">
+        <span *ngIf="promotedStreams.includes(stream.id)">
+          <ion-icon name="checkmark"></ion-icon>&nbsp; {{"Promote to" | translate}}
+          {{stream.promote_to_name}}
+        </span>
+        <span *ngIf="stream.promote_to < 9 && !promotedStreams.includes(stream.id)">{{"Promote to" |
+          translate}}</span>
+        <span *ngIf="stream.promote_to > 8"> Graduate Class</span>
+      </ion-button>
+      <ion-button *ngIf="unDoPromotion" fill="outline" size="small" slot="end">{{"Reverse Promotion" |
+        translate}} </ion-button>
+      <ion-button *ngIf="completePromotion" fill="outline" size="small" slot="end">{{"Complete Promotion" |
+        translate}}</ion-button>
+    </ion-item>
+    <p *ngIf="error" class="form-error">{{error | translate}}</p>
+  </ion-list>
+  <ion-button *ngIf="!unDoPromotion && !completePromotion" [disabled]="toPromote.length != toPromoteStreamsCount"
+   expand="block" class="submit-button" (click)="promoteSchoool()">
+    {{"Promote Learners" | translate}}
+  </ion-button>
+  <ion-button *ngIf="completePromotion" [disabled]="btnLoading" expand="block" class="submit-button"
+    (click)="apiCompletePromotion()">
+    <span *ngIf="btnLoading">{{"Loading" | translate}}...</span>
+    <span *ngIf="!btnLoading">{{"Complete Promotion" | translate}}</span>
+  </ion-button>
+  <ion-button *ngIf="unDoPromotion" expand="block" class="submit-button" (click)="reversePromotion()">
+    {{"Reverse Promotion" | translate}}
+  </ion-button>
+</ion-content>

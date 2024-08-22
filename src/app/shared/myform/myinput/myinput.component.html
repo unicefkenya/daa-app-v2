@@ -1,0 +1,38 @@
+<ion-item *ngIf="visible" [formGroup]="form" [for]="formControName" [ngSwitch]="formControlType">
+    <ion-label position="stacked" [for]="formControName" class="input-label">{{displayControlName}}
+        <ion-text *ngIf="isRequired" class="input-required" color="danger">*</ion-text>
+    </ion-label>
+
+    <ion-checkbox *ngSwitchCase="'boolean'" [formControlName]="formControName" slot="end"></ion-checkbox>
+
+    <ion-textarea *ngSwitchCase="'textArea'" class="form-control" [attr.aria-label]="formControName" rows="5" cols="4"
+        [formControlName]="formControName" [id]="formControName"></ion-textarea>
+
+    <ion-select [attr.aria-label]="formControName" [formControlName]="formControName" [id]="formControName"
+        *ngSwitchCase="'choice'">
+        <ion-select-option *ngIf="isLoading" disabled value="">{{isLoadingDisplay}}</ion-select-option>
+        <!-- <ion-select-option *ngIf="!isLoading" disabled value="">Select {{displayControlName}}</ion-select-option> -->
+        <ion-select-option *ngFor="let opt of choices" [value]="opt.value">
+            {{opt.display_name}}
+        </ion-select-option>
+    </ion-select>
+
+    <ion-select [attr.aria-label]="formControName" [formControlName]="formControName" [id]="formControName"
+        *ngSwitchCase="'multiplechoice'" multiple="true">
+        <ion-select-option *ngIf="isLoading" disabled value="">Fetching ...</ion-select-option>
+        <!-- <ion-select-option *ngIf="!isLoading" disabled value="">Select {{displayControlName}}</ion-select-option> -->
+        <ion-select-option *ngFor="let opt of choices" [value]="opt.value">
+            {{opt.display_name}}
+        </ion-select-option>
+    </ion-select>
+
+
+    <ion-input [placeholder]="placeholderText" class="input-placeholder" [name]="formControName"
+        [formControlName]="formControName" [type]="formControlType" *ngSwitchDefault>
+    </ion-input>
+
+
+</ion-item>
+<ion-text *ngFor="let error of errors" color="danger">
+    {{error}} <br>
+</ion-text>

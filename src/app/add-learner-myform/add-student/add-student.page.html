@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/students/add-student"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label">
+      <span>{{ "Add Learner"| translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-myform #myStudentsForm [formItems]="formItems" [url]="url" (onValidatedData)="onValidatedData($event)"
+    submitButtonText="Next" submitButtonPreText="" [preSaveDataFunction]="preSendData" isValidationOnly="true"
+    [formGroupOrder]="formGroupOrder" [instance]="instance" [hideButtons]=false>
+  </app-myform>
+
+</ion-content>

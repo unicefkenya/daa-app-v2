@@ -1,0 +1,75 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+* {
+  font-family: "Prompt-Regular";
+}
+
+ion-button {
+  --border-radius: 10px;
+}
+
+.submit-button {
+  font-family: "Prompt-Bold";
+  font-size: 20px;
+  color: #fff;
+  text-transform: capitalize;
+  margin: 10% 0% 10% 6%;
+  max-width: 90%;
+  height: 50px;
+  letter-spacing: 0px;
+}
+
+.submit-button:hover{
+  background-color: white;
+  border: solid 2px #3F85D6;
+  color: #3F85D6 !important;
+  border-radius: 10px;
+}
+
+/* ------ Label Styling ------ */
+
+.school-label {
+  font-family: "Prompt-Bold";
+  color: #404040;
+  font-size: 20px;
+}
+
+/* ------- Form Styling ------ */
+
+.input-label {
+  font-family: "Prompt-Medium";
+  color: #404040;
+  font-size: 18px;
+}
+
+.input-placeholder {
+  font-family: "Prompt-Light";
+  font-size: 14px;
+}
+
+.list-margin {
+  margin-top: 4%;
+}
+
+.select-icon {
+  color: #3880ff !important;
+}
+
+.ion-color-danger {
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+
+
+

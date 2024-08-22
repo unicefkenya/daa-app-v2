@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/teachers"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="school-label">
+      <span *ngIf="!edit">{{"Add Teacher" | translate}}</span> <span *ngIf="edit">{{"Edit Teacher" | translate}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="teacherForm" (ngSubmit)="submitTeacherForm()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding list-margin">
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"First Name" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="first_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Middle Name" | translate}}
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="middle_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Last Name" | translate}} &nbsp;<ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" formControlName="last_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Telephone Number" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input type="text" class="input-placeholder" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Date Of Birth" | translate}} &nbsp;<ion-text
+            color="danger">*</ion-text>
+        </ion-label>
+        <ion-input class="input-placeholder" placeholder="{{'Select Date' | translate}}" formControlName="dob"
+          (click)="pickDate()" readonly></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="displayClasses">
+        <ion-label position="stacked" class="input-label">{{"Classes" | translate}}
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="{{'Select Classes'  | translate}}" formControlName="streams"
+          multiple>
+          <ion-select-option *ngFor="let class of classes" [value]="class.id">{{class.base_class}}{{class.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Email Address" | translate}}
+        </ion-label>
+        <ion-input type="email" class="input-placeholder" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"TSC Number" | translate}}
+        </ion-label>
+        <ion-input type="text" class="input-placeholder" formControlName="tsc_no"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="input-label">{{"Add as Admin" | translate}} </ion-label>
+        <ion-checkbox color="primary" mode="ios" checked="false" formControlName="is_school_admin" slot="end"
+          (click)="isAdmin()"></ion-checkbox>
+        <p *ngIf="error" class="form-error">{{error | translate}}</p>
+      </ion-item>
+
+    </ion-list>
+    <ion-button expand="block" type="submit" class="submit-button">
+      <span *ngIf="!edit">{{"Add Teacher" | translate}}</span> <span *ngIf="edit">{{"Edit Teacher" | translate}}</span>
+    </ion-button>
+  </form>
+
+</ion-content>
+
+<!-- <ion-item>
+        <ion-label position="stacked" class="input-label">Gender
+        </ion-label>
+        <ion-select class="input-placeholder" placeholder="Select Learner Gender" formControlName='gender'>
+          <ion-select-option value="F">Female</ion-select-option>
+          <ion-select-option value="M">Male</ion-select-option>
+        </ion-select>
+      </ion-item> -->

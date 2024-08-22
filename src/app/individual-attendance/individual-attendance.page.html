@@ -1,0 +1,187 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/view-students"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="attendance-label">{{student[1]| titlecase}} {{student[2] | titlecase}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-accordion-group>
+        <ion-accordion value="colors">
+            <ion-item slot="header">
+                <ion-label class="learner-label">Click to View Learner Metadata</ion-label>
+            </ion-item>
+
+            <ion-list *ngIf="mainStud" slot="content">
+
+                <ion-item>
+                    <ion-label>Learner Name</ion-label>
+                    <p>{{mainStud.full_name}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>UPI Number</ion-label>
+                    <p>{{mainStud.upi}}</p>
+                    <p *ngIf="mainStud.upi == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Admission Number</ion-label>
+                    <p>{{mainStud.admission_no}}</p>
+                    <p *ngIf="mainStud.admission_no == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Student Status</ion-label>
+                    <p>{{mainStud.status_display}}</p>
+                    <p *ngIf="mainStud.status == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Gender</ion-label>
+                    <p>{{mainStud.gender_display}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Date of Birth / Age</ion-label>
+                    <p>{{mainStud.date_of_birth}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Date Of Admission</ion-label>
+                    <p>{{mainStud.date_enrolled}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Class / Grade</ion-label>
+                    <p>{{mainStud.base_class}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Special Needs</ion-label>
+                    <span>
+                        <p>{{getList(mainStud.special_needs_details)}}</p>
+                    </span>
+                    <p *ngIf="mainStud.special_needs_details == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Distance From School (In Kms)</ion-label>
+                    <p>{{mainStud.distance_from_school}}</p>
+                    <p *ngIf="mainStud.distance_from_school == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>County</ion-label>
+                    <p>{{mainStud.county_name}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Sub County</ion-label>
+                    <p>{{mainStud.sub_county_name}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Village</ion-label>
+                    <p>{{mainStud.village}}</p>
+                    <p *ngIf="mainStud.village == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian Name</ion-label>
+                    <p>{{mainStud.guardian_name}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian Phone Number</ion-label>
+                    <p>{{mainStud.guardian_phone}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian Email Address</ion-label>
+                    <p>{{mainStud.guardian_email}}</p>
+                    <p *ngIf="mainStud.guardian_email == null">N/A</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian Status</ion-label>
+                    <p>{{mainStud.guardian_status_display}}</p>
+                    <p *ngIf="mainStud.guardian_status_display == null">N/A</p>
+
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian County</ion-label>
+                    <p>{{mainStud.guardian_county_name}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Guardian Sub County</ion-label>
+                    <p>{{mainStud.guardian_sub_county_name}}</p>
+                </ion-item>
+
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
+    <div class="spacing"></div>
+    <!-- 
+    <ion-accordion-group>
+        <ion-accordion value="colors" class="reason-absence">
+            <ion-item slot="header">
+                <ion-label class="learner-label">Click to View Reasons for Absence</ion-label>
+            </ion-item>
+            <ion-list slot="content">
+                <ion-item>
+                    <ion-label>22/03/2022</ion-label>
+                    <p>Sickness</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>22/03/2022</ion-label>
+                    <p>Poverty</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>22/03/2022</ion-label>
+                    <p>Distance from School</p>
+                </ion-item>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group> -->
+
+
+    <div *ngIf="noReport" class="success-error">
+        <ion-icon class='icon-success' name="close-circle-outline"></ion-icon>
+        <p class='form-success'>{{noReport | translate}}</p>
+    </div>
+    <ion-card *ngIf="!noReport" class="chart-card">
+        <ion-card-content *ngIf="resolved">
+            <app-bar [data]='report'></app-bar>
+        </ion-card-content>
+    </ion-card>
+    <ion-list *ngIf="!noReport">
+        <ion-card>
+            <ion-card-content class="present-bg" *ngIf="resolved">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size=2>
+                            <ion-icon class="probability-check" name="checkmark-circle-outline"></ion-icon>
+                        </ion-col>
+                        <ion-col size=7>
+                            <span class="retention-rate"> {{"Survival Risk Rate" | translate}}</span><br>
+                            <span class="retention-rate-text">
+                                {{"This is the probability calculated by number of days the learner has appeared
+                                present" | translate}}
+                            </span>
+                        </ion-col>
+                        <ion-col size=3>
+                            <span class="retention-number"> {{ probability.retention }}%</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-content class="absent-bg" *ngIf="resolved">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size=2>
+                            <ion-icon class="probability-check" name="warning"></ion-icon>
+                        </ion-col>
+                        <ion-col size=7>
+                            <span class="retention-rate"> {{"Dropout Risk Rate" | translate}}</span><br>
+                            <span class="retention-rate-text">
+                                {{"This is the risk of the learner dropping out based on absent days" |
+                                translate}}</span>
+                        </ion-col>
+                        <ion-col size=3>
+                            <span class="retention-number"> {{ probability.dropout }}%</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+</ion-content>

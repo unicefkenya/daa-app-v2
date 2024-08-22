@@ -1,0 +1,3 @@
+FROM michameiu/android-build
+
+EXPOSE 4200

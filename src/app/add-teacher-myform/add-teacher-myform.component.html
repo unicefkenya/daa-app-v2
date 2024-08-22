@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/teachers"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Teacher</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-myform [extraFields]="extra_fields" [formItems]="formItems" [url]="url"
+    (onValidatedData)="onValidatedData($event)" [submitButtonText]="'Teacher'" [formGroupOrder]="formGroupOrder"
+    [hideButtons]=false (onPostedData)="onPostedData($event)" [instance]="instance">
+  </app-myform>
+
+</ion-content>

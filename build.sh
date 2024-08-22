@@ -1,6 +1,6 @@
 #/bin/bash
 set -e
-IMAGE=michameiu/android-build
+IMAGE=dockerhubusername/android-build
 VERSION=v1.0.0
 
 # git push origin main

@@ -37,7 +37,7 @@ Additionally, ensure the backend API is already set up and accessible, e.g., `ht
 
 Start by cloning the project repository:
 
-```bash
+```bash 
 git clone https://github.com/unicefkenya/daa-app-v2
 cd daa-app-v2
 ```
